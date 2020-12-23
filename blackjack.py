@@ -1,17 +1,17 @@
 # Martin Ivanov
 # April 1 2020
+# Updated Dec 23 2020
 # Blackjack!!
 # Need to add a "split" option
-# Need to make sure all possible cases are covered
-# Need to add a quit function
-# Need to add something for if the player runs out of money
 
 import pygame
 from card_deck import Deck
 
 _image_library = {}
 pygame.init()
-
+pygame.display.set_caption('Blackjack')
+programIcon = pygame.image.load('myresources/icon.png')
+pygame.display.set_icon(programIcon)
 
 def get_image(path):
     global _image_library
@@ -298,7 +298,10 @@ class GameScene(SceneBase):
                 if pygame.Rect(600, 415, 175, 60).collidepoint(mouse_pos) and self.avail_hit:
                     self.double()
                 if pygame.Rect(631, 500, 108, 36).collidepoint(mouse_pos) and self.avail_continue:
-                    self.switch_to_scene(BetScene(self.bal))
+                    if self.bal < 25:
+                         self.switch_to_scene(GameOverScene())
+                    else:
+                        self.switch_to_scene(BetScene(self.bal))
 
     def update(self):
         self.calculate_scores()
@@ -435,14 +438,24 @@ class GameScene(SceneBase):
         self.avail_double = False
         self.cards_dealer[1].faceup = True
         self.calculate_scores()
+        if self.score_player < self.score_player_alt and self.score_player_alt <= 21:
+            self.score_player = self.score_player_alt
         if self.score_dealer > self.score_player:
             self.bust()
         else:
+            if self.score_dealer < self.score_dealer_alt and self.score_dealer_alt <= 21:
+                self.score_dealer = self.score_dealer_alt
             while self.score_dealer < 17:
                 self.hit_dealer()
                 self.calculate_scores()
+                if self.score_dealer < self.score_dealer_alt and self.score_dealer_alt <= 21:
+                    self.score_dealer = self.score_dealer_alt
                 self.check_scores()
             self.calculate_scores()
+            if self.score_player < self.score_player_alt and self.score_player_alt <= 21:
+                self.score_player = self.score_player_alt
+            if self.score_dealer < self.score_dealer_alt and self.score_dealer_alt <= 21:
+                self.score_dealer = self.score_dealer_alt
             self.check_scores()
 
     def hit(self):
@@ -461,6 +474,8 @@ class GameScene(SceneBase):
         self.hit()
         self.cards_dealer[1].faceup = True
         self.calculate_scores()
+        if self.score_player < self.score_player_alt and self.score_player_alt <= 21:
+            self.score_player = self.score_player_alt
         if self.score_dealer > self.score_player or self.score_player > 21:
             self.bust()
         elif self.blackjack(self.cards_player):
@@ -469,10 +484,16 @@ class GameScene(SceneBase):
             while self.score_dealer < 17:
                 self.hit_dealer()
                 self.calculate_scores()
+                if self.score_dealer < self.score_dealer_alt and self.score_dealer_alt <= 21:
+                    self.score_dealer = self.score_dealer_alt
                 self.check_scores()
             self.calculate_scores()
+            if self.score_player < self.score_player_alt and self.score_player_alt <= 21:
+                self.score_player = self.score_player_alt
+            if self.score_dealer < self.score_dealer_alt and self.score_dealer_alt <= 21:
+                self.score_dealer = self.score_dealer_alt
             self.check_scores()
-
+            
     def blackjack(self, cards):
         score = 0
         score_alt = 0
@@ -596,4 +617,28 @@ class GameScene(SceneBase):
             self.game_over_text = "WIN"
             self.bal += self.bet * 2
 
+class GameOverScene(SceneBase):
+
+    def __init__(self):
+        SceneBase.__init__(self)
+        self.table_colour = (178, 34, 34)
+
+    def render(self, screen):
+        screen.fill(self.table_colour)
+        deck_img = get_image('myresources/deckimg.png')
+        deck_img = pygame.transform.scale(deck_img, (148, 193))
+        screen.blit(deck_img, (35, 85))
+        pokerchips1_img = get_image('myresources/pokerchips1.png')
+        screen.blit(pokerchips1_img, (5, 345))
+        pokerchips2_img = get_image('myresources/pokerchips2.png')
+        screen.blit(pokerchips2_img, (600, 0))
+        over_text = create_text("GAME OVER", 40, (0, 0, 0))
+        exit_text = create_text("Press the Escape key to exit.", 15, (0, 0, 0))
+        screen.blit(over_text, (centre_w(over_text, screen), centre_h(over_text, screen) - 30))
+        screen.blit(exit_text, (centre_w(exit_text, screen), centre_h(exit_text, screen)))
+
+    def terminate(self):
+        self.switch_to_scene(None)
+
 run_game(BetScene(500))
+
