@@ -75,7 +75,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 This project is a fully functioning Blackjack game written completely in Python3 using the pygame module. I found the process of using pygame quite tedious because I was constantly having to find the layout using trial and error by changing individual pixel values. I also found the process of debugging all of the possible outcomes of the game to be quite tedious and if-statement heavy. However, I am very satisfied with the final look and feel of the game. I learned a lot about writing game loops and rendering. I should have implemented more OOP principles into my design to practice using those as well.
-    In the future, I would like to add a feature to the game that will analyse the current state and tell the player what decision to make in order to have the highest chance of winning.
+    In the future, I would like to add a feature to the game that will analyse the current state and tell the player what decision to make in order to have the highest chance of winning. I may also add a "SPLIT" feature.
 
 <!-- GETTING STARTED -->
 ## Getting Started
