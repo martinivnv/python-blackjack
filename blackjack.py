@@ -553,7 +553,7 @@ class GameScene(SceneBase):
                 self.score_player += val
                 self.score_player_alt += val_alt
         if self.score_player_alt == 31:
-            self.score.player = 21
+            self.score_player = 21
         elif self.score_player_alt > 21:
             self.score_player_alt = self.score_player
         elif self.score_player_alt == 21:
