@@ -295,7 +295,7 @@ class GameScene(SceneBase):
                     self.stand()
                 if pygame.Rect(600, 340, 175, 60).collidepoint(mouse_pos) and self.avail_hit:
                     self.hit()
-                if pygame.Rect(600, 415, 175, 60).collidepoint(mouse_pos) and self.avail_hit:
+                if pygame.Rect(600, 415, 175, 60).collidepoint(mouse_pos) and self.avail_double:
                     self.double()
                 if pygame.Rect(631, 500, 108, 36).collidepoint(mouse_pos) and self.avail_continue:
                     if self.bal < 25:
