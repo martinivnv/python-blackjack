@@ -49,6 +49,9 @@
   <summary><h2 style="display: inline-block">Table of Contents</h2></summary>
   <ol>
     <li>
+      <a href="#screenshots">Screenshots</a>
+    </li>
+    <li>
       <a href="#about-the-project">About The Project</a>
     </li>
     <li>
@@ -62,11 +65,23 @@
     <li><a href="#contributing">Contributing</a></li>
     <li><a href="#license">License</a></li>
     <li><a href="#contact">Contact</a></li>
-    <li><a href="#acknowledgements">Acknowledgements</a></li>
   </ol>
 </details>
 
-
+## Screenshots
+<p align="center">
+    <img src="myresources/screenshot1.PNG" alt="screenshot1" width="600" >
+    <p align="center">
+      Figure 1: Bet screen
+    </p>
+    <br>
+    <p align="center">
+      <img src="myresources/screenshot2.PNG" alt="screenshot2" width="600" >
+      <p align="center">
+        Figure 2: Play screen
+      </p>
+    </p>
+</p>
 
 <!-- ABOUT THE PROJECT -->
 ## About The Project
